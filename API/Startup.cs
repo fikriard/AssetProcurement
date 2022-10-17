@@ -33,7 +33,7 @@ namespace API
             services.AddControllers();
 
             services.AddTokenAuthentication(Configuration);
-
+            services.AddHttpContextAccessor();
 
             services.AddScoped<DepartmentRepository>();
             services.AddScoped<AssetCategoryRepository>();
@@ -44,6 +44,12 @@ namespace API
             services.AddScoped<AccountRepository>();
             services.AddScoped<YearsProcurementRepository>();
 
+            services.AddCors(option => option.AddPolicy("DefaultPolicy",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod();
+                    /* builder.WithOrigins("https://localhost:44303").WithMethods("GET","POST");*/
+                }));
 
             services.AddDbContext<MyContext>(option => option.UseSqlServer(Configuration.GetConnectionString("connection")));
 
@@ -89,6 +95,7 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("DefaultPolicy");
 
             app.UseRouting();
             app.UseSwagger();
@@ -102,7 +109,9 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default", 
+                    pattern: "{controller=Home}/{action=Login}/{id?}");
             });
         }
     }

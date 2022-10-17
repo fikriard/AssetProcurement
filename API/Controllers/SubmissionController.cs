@@ -14,7 +14,7 @@ namespace API.Controllers
     [ApiController]
     public class SubmissionController : ControllerBase
     {
-        AssetSubmissionRepository submissionRepository;
+        private readonly AssetSubmissionRepository submissionRepository;
         private IConfiguration iconfiguration;
         public SubmissionController(AssetSubmissionRepository submissionRepository, IConfiguration iconfiguration)
         {
@@ -97,7 +97,7 @@ namespace API.Controllers
         [HttpGet("GetAdminALL")]
         public ActionResult GetSubmissionAdmiAll()
         {
-            var result = submissionRepository.GetSubmissionAdmiAll();
+            var result = submissionRepository.GetSubmissionAdminAll();
 
             if (result.Count() != 0)
             {

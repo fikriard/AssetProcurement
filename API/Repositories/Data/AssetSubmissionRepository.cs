@@ -144,7 +144,7 @@ namespace API.Repositories.Data
             var data = register.ToList();
             return data;
         }
-        public IEnumerable<Submission> GetSubmissionAdmiAll()
+        public IEnumerable<Submission> GetSubmissionAdminAll()
         {
             var register = from a in myContext.Employees
                            join b in myContext.AssetSubmission on a.NIK equals b.Employee_Id

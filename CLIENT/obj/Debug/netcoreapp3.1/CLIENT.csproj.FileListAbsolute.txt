@@ -174,3 +174,8 @@ C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\CLIENT.pdb
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\CLIENT.genruntimeconfig.cache
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Succes.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Submission\GetSubmissionAdmin.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Forbidden.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Unauthorized.cshtml.g.cs

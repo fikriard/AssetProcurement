@@ -32,17 +32,20 @@ namespace CLIENT
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            services.AddSession();
+            services.AddScoped<AssetSubmissionRepository>();
             services.AddScoped<AuthRepository>();
+            
+
 
             services.AddDbContext<MyContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("connection")));
-
-
+                   options.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddSession(option =>
             {
                 option.IdleTimeout = TimeSpan.FromMinutes(15);
             });
-            services.AddHttpContextAccessor();
+            
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -64,8 +67,8 @@ namespace CLIENT
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
-            services.AddSession();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,23 +91,24 @@ namespace CLIENT
 
             app.UseSession();
 
-            //app.UseStatusCodePages(async context => {
-            //    var request = context.HttpContext.Request;
-            //    var response = context.HttpContext.Response;
-            //    if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
-            //    {
-            //        response.Redirect("../home/NotFound404");
-            //    }
-            //    else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
-            //    {
-            //        response.Redirect("../home/Forbidden");
-            //    }
-            //    else if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
-            //    {
-            //        response.Redirect("../home/Unauth");
+            app.UseStatusCodePages(async context =>
+            {
+                var request = context.HttpContext.Request;
+                var response = context.HttpContext.Response;
+                if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
+                {
+                    response.Redirect("../home/NotFound404");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
+                {
+                    response.Redirect("../home/Forbidden");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
+                {
+                    response.Redirect("../home/Unauth");
 
-            //    }
-            //});
+                }
+            });
 
             app.Use(async (HttpContext context, Func<Task> next) =>
             {
@@ -123,8 +127,9 @@ namespace CLIENT
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Login}/{id?}");
             });
+            
         }
     }
 }

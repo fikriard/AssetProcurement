@@ -29,7 +29,8 @@ namespace CLIENT.Controllers
             var token = new JwtSecurityTokenHandler().ReadJwtToken(jwttoken.Token);
             var email = token.Claims.First(c => c.Type == "email").Value;
             var id = token.Claims.First(c => c.Type == "nameid").Value;
-            var role = token.Claims.First(c => c.Type == "unique_name").Value;
+            var name = token.Claims.First(c => c.Type == "unique_name").Value;
+            var role = token.Claims.First(c => c.Type == "role").Value;
             if (jwttoken.Token == null)
             {
                 return Json(Url.Action("Index", "Home"));
@@ -37,7 +38,8 @@ namespace CLIENT.Controllers
             HttpContext.Session.SetString("JWToken", jwttoken.Token);
             HttpContext.Session.SetString("Email", email);
             HttpContext.Session.SetString("EmployeeId", id);
-            HttpContext.Session.SetString("Role", role);
+            HttpContext.Session.SetString("name", name);
+            HttpContext.Session.SetString("role", role);
 
             return Json(Url.Action("Succes", "Home"));
         }
@@ -56,7 +58,7 @@ namespace CLIENT.Controllers
         {
             HttpContext.Session.Remove("Token");
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Login", "Home");
         }
     }
 }

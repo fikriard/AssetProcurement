@@ -15,11 +15,11 @@ namespace CLIENT.Repositories.Data
     {
         private readonly string request;
         private readonly string address;
-        private readonly IHttpContextAccessor _contextAccessor;
+       
         private readonly HttpClient httpClient;
         public AuthRepository()
         {
-            this.address = "https://localhost:5001/api/";
+            this.address = "https://localhost:44371/api/";
             this.request = "Account/";
             httpClient = new HttpClient
             {

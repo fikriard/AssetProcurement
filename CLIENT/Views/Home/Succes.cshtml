@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Http;
 
+@{
+    Layout = "_AdminLayout";
+}
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -10,7 +13,7 @@
     <h3>Success Page</h3>
     Welcome @Context.Session.GetString("EmployeeId")
     <br>
-    <a asp-controller="account" asp-action="logout">Logout</a>
+    <a asp-controller="Home" asp-action="login">Logout</a>
 
 </body>
 </html>
