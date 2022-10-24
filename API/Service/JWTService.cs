@@ -21,7 +21,7 @@ namespace API.Service
             _expDate = config.GetSection("JwtConfig").GetSection("expirationInMinutes").Value;
         }
 
-        public string GenerateSecurityToken(int id, string Email, string Name, string Role)
+        public string GenerateSecurityToken(string id, string Email, string Name, string Role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_secret);
@@ -29,7 +29,7 @@ namespace API.Service
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, id),
                     new Claim(ClaimTypes.Email, Email),
                     new Claim(ClaimTypes.Name, Name),
                     new Claim(ClaimTypes.Role, Role)

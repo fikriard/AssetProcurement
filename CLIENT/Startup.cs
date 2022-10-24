@@ -35,6 +35,9 @@ namespace CLIENT
             services.AddHttpContextAccessor();
             services.AddSession();
             services.AddScoped<AssetSubmissionRepository>();
+            services.AddScoped<AssetCategoryRepository>();
+            services.AddScoped<AssetLocationRepository>();
+            services.AddScoped<YearsProcurementRepository>();
             services.AddScoped<AuthRepository>();
             
 
@@ -90,7 +93,16 @@ namespace CLIENT
             app.UseRouting();
 
             app.UseSession();
+            app.Use(async (HttpContext context, Func<Task> next) =>
+            {
+                var token = context.Session.GetString("token");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.Request.Headers.Add("Authorization", "Bearer " + token.ToString());
+                }
 
+                await next();
+            });
             app.UseStatusCodePages(async context =>
             {
                 var request = context.HttpContext.Request;
@@ -110,16 +122,7 @@ namespace CLIENT
                 }
             });
 
-            app.Use(async (HttpContext context, Func<Task> next) =>
-            {
-                var token = context.Session.GetString("token");
-                if (!string.IsNullOrEmpty(token))
-                {
-                    context.Request.Headers.Add("Authorization", "Bearer " + token.ToString());
-                }
-
-                await next();
-            });
+           
             app.UseAuthentication();
             app.UseAuthorization();
 

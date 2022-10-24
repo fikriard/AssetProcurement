@@ -175,7 +175,14 @@ C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\CLIENT.genruntimeconfig.cache
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Succes.cshtml.g.cs
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
-C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Submission\GetSubmissionAdmin.cshtml.g.cs
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Forbidden.cshtml.g.cs
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Unauthorized.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Submission\GetAdmin.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Submission\GetFinance.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Submission\GetAdminAll.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Submission\GetEmployee.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_EmployeeLayout.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_FinanceLayout.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\ForgetPass.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\AssetCategory\Index.cshtml.g.cs

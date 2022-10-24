@@ -31,7 +31,8 @@ namespace CLIENT.Repositories.Data
             JWTTokenVM token = null;
             StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
             var postTask = httpClient.PostAsync(address + request + "Login", content);
-            postTask.Wait();            var result = postTask.Result;
+            postTask.Wait();            
+            var result = postTask.Result;
             var ResultJsonString = await result.Content.ReadAsStringAsync();
 
             token = JsonConvert.DeserializeObject<JWTTokenVM>(ResultJsonString);

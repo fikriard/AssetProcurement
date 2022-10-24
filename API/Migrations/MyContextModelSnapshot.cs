@@ -85,8 +85,8 @@ namespace API.Migrations
                     b.Property<int?>("BrokenAsset")
                         .HasColumnType("int");
 
-                    b.Property<int>("Employee_Id")
-                        .HasColumnType("int");
+                    b.Property<string>("Employee_Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("GoodAsset")
                         .HasColumnType("int");
@@ -133,10 +133,8 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Employees", b =>
                 {
-                    b.Property<int>("NIK")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("NIK")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Department_Id")
                         .HasColumnType("int");
@@ -200,8 +198,8 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -224,8 +222,8 @@ namespace API.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -282,9 +280,7 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Employees", "Employees")
                         .WithMany()
-                        .HasForeignKey("Employee_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Employee_Id");
 
                     b.HasOne("API.Models.YearsProcurement", "YearsProcurement")
                         .WithMany()
@@ -327,9 +323,7 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

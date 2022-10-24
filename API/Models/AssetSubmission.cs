@@ -18,21 +18,22 @@ namespace API.Models
         public Status Status { get; set; }
         public int? GoodAsset { get; set; }
         public int? BrokenAsset { get; set; }
-        [ForeignKey("Employees")]
-        public int Employee_Id { get; set; }
         public virtual Employees Employees { get; set; }
-
+        [ForeignKey("Employees")]
+        public string Employee_Id { get; set; }
+        
+        public virtual AssetLocation AssetLocation { get; set; }
         [ForeignKey("AssetLocation")]
         public int AssetLocation_Id { get; set; }
-        public virtual AssetLocation AssetLocation { get; set; }
-
+        
+        public virtual AssetCategory AssetCategory { get; set; }
         [ForeignKey("AssetCategory")]
         public int AssetCategory_Id { get; set; }
-        public virtual AssetCategory AssetCategory { get; set; }
-
+        
+        public virtual YearsProcurement YearsProcurement { get; set; }
         [ForeignKey("YearsProcurement")]
         public int YearsOfSubmission { get; set; }
-        public virtual YearsProcurement YearsProcurement{ get; set; }
+        
 
     }
     public enum Status

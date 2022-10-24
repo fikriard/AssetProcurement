@@ -41,7 +41,20 @@ namespace CLIENT.Controllers
             HttpContext.Session.SetString("name", name);
             HttpContext.Session.SetString("role", role);
 
-            return Json(Url.Action("Succes", "Home"));
+            if (role == "Finance")
+            {
+                return Json(Url.Action("GetFinance", "Submission"));
+            }
+            else if(role == "Admin")
+            {
+                return Json(Url.Action("GetAdminAll", "Submission"));
+            }
+            else
+            {
+                return Json(Url.Action("GetEmployee", "Submission"));
+            }
+            
+
         }
 
 

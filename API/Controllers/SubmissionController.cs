@@ -1,4 +1,6 @@
-﻿using API.Repositories.Data;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
 using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +14,16 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubmissionController : ControllerBase
+    public class SubmissionController : BaseController<AssetSubmissionRepository, AssetSubmission, string>
     {
         private readonly AssetSubmissionRepository submissionRepository;
         private IConfiguration iconfiguration;
-        public SubmissionController(AssetSubmissionRepository submissionRepository, IConfiguration iconfiguration)
+        public SubmissionController(AssetSubmissionRepository submissionRepository, IConfiguration iconfiguration) : base(submissionRepository)
         {
             this.submissionRepository = submissionRepository;
             this.iconfiguration = iconfiguration;
         }
-        [HttpPost]
+        [HttpPost("SubmissionForm")]
         public IActionResult SubmissionForm(Submission submission)
         {
             var result = submissionRepository.SubmissionForm(submission);
@@ -29,7 +31,7 @@ namespace API.Controllers
                 return Ok(new { result = 200, message = "Succesfuly Created" });
             return BadRequest();
         }
-         [HttpPut("{id}")]
+         [HttpPut("submisisonEdit/{id}")]
         public IActionResult submissionEdit(string assetcode, SubmisionEdit submisionEdit)
         {
         
@@ -42,7 +44,20 @@ namespace API.Controllers
                 return NotFound();
             return BadRequest();
         }
-        [HttpGet("id")]
+        [HttpPut("ApproveFinance")]
+        public IActionResult ApproveFinance(SubmissionFinance submissionFinance, string assetcode, int yearsid)
+        {
+
+            var result = submissionRepository.SubmissionUpdateFinance(submissionFinance, assetcode, yearsid);
+
+            // updating the data
+            if (result > 0)
+                return Ok(new { result = 200, message = "Succesfuly Update" });
+            else if (result == -1)
+                return NotFound();
+            return BadRequest();
+        }
+        [HttpGet("GetSubmissionId/{id}")]
         public IActionResult GetSubmissionId(string id)
         {
             if (string.IsNullOrWhiteSpace(id.ToString()))
@@ -59,8 +74,8 @@ namespace API.Controllers
                 return NotFound();
             }
         }
-        [HttpGet("GetSubmissionEmployee")]
-        public ActionResult GetSubmission(int employeeid)
+        [HttpGet("GetSubmissionEmployee/{employeeid}")]
+        public ActionResult GetSubmission(string employeeid)
         {
             var result = submissionRepository.GetSubmission(employeeid);
 

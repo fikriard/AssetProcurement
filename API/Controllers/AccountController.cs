@@ -47,7 +47,6 @@ namespace API.Controllers
                 return Ok(new { status = 200, message = "login successful!", token = token });
             }
             return BadRequest();
-
         }
         [HttpPost]
         [Route("Register")]

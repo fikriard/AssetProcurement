@@ -13,26 +13,26 @@ using System.Threading.Tasks;
 
 namespace CLIENT.Repositories
 {
-    public class GeneralRepository<Entity> : IGeneralRepository<Entity>
+    public class GeneralRepository<Entity,Primary> : IGeneralRepository<Entity,Primary>
         where Entity : class
     {
         private readonly string request;
-        private readonly Address address;
+        private readonly string address;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
 
-        public GeneralRepository(Address address,string request)
+        public GeneralRepository(string request)
         {
-            this.address = address;
+            this.address = "https://localhost:44371/api/"; ;
             this.request = request;
             _contextAccessor = new HttpContextAccessor();
             httpClient = new HttpClient
             {
-                BaseAddress = new Uri(address.link)
+                BaseAddress = new Uri(address)
             };
 
         }
-        public HttpStatusCode Delete(int id)
+        public HttpStatusCode Delete(Primary id)
         {
             var result = httpClient.DeleteAsync(request + id).Result;
             return result.StatusCode;
@@ -50,7 +50,7 @@ namespace CLIENT.Repositories
             return entities.data;
         }
 
-        public async Task<Entity> Get(int? id)
+        public async Task<Entity> Get(Primary id)
         {
             //Entity entity = null;
             Results<Entity> entity = new Results<Entity>();
@@ -70,7 +70,7 @@ namespace CLIENT.Repositories
             return result.StatusCode;
         }
 
-        public HttpStatusCode Put(int id, Entity entity)
+        public HttpStatusCode Put(Primary id, Entity entity)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
             var result = httpClient.PutAsync(request + id, content).Result;

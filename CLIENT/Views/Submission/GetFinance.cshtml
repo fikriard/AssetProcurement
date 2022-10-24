@@ -1,0 +1,61 @@
+﻿@model IEnumerable<API.ViewModels.SubmissionAF>
+
+@{
+    ViewData["Title"] = "GetFinance";
+    Layout = "_FinanceLayout";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Asset All</h4>
+        </div>
+
+        <table class="table table-hover dt-responsive table-striped nowarp" id="dataTableGetSubmissionAdmin" style="width:100%">
+            <thead class="table-active head-table text-center">
+                <tr class="bg-primary column-tab">
+                    <th scope="col" class="text-light text-center">Employee</th>
+                    <th scope="col" class="text-light text-center">Asset Name</th>
+                    <th scope="col" class="text-light text-center">Volume</th>
+                    <th scope="col" class="text-light text-center">Status</th>
+                    <th scope="col" class="text-light text-center">Asset Value</th>
+                    <th scope="col" class="text-light text-center">Asset Location</th>
+                    <th scope="col" class="text-light text-center">Years of Submission</th>
+                    <th scope="col" class="text-light text-center">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="DetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DetailModal">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Detail">
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/SubmissionFinance/Submission.js"></script>
+}
+

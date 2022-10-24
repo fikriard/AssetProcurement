@@ -22,7 +22,7 @@ namespace API.Repositories.Data
             var checkUsername = myContext.User.SingleOrDefault(user => user.UserName.Equals(username));
             return checkUsername;
         }
-        public User Get(int id)
+        public User Getuser(string id)
         {
             var checkUsername = myContext.User.Find(id);
             return checkUsername;
@@ -37,7 +37,7 @@ namespace API.Repositories.Data
             var checkEmployee = GetEmployee(email);
             if (checkEmployee != null)
             {
-                var checkUser = Get(checkEmployee.NIK);
+                var checkUser = Getuser(checkEmployee.NIK);
                 if (checkUser != null)
                 {
                     if (Hashing.ValidatePassword(password, checkUser.Password))
@@ -145,7 +145,7 @@ namespace API.Repositories.Data
             }
             return null;
         }
-        public string GetRolesByUserId(int id)
+        public string GetRolesByUserId(string id)
         {
             var user = myContext.User.Find(id);
             UserRole[] userRole = myContext.UserRole.Where(x => x.UserId.Equals(id)).ToArray();

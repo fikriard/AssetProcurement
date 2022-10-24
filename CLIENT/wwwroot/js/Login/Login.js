@@ -1,15 +1,16 @@
 ﻿
 function Login() {
-    var obj = new Object();
-    obj.email = $("#email").val(),
-        obj.password = $("#password").val(),
-        console.log(obj),
+        email = $("#email").val()
+        password = $("#password").val()
 
         $.ajax({
             type: "POST",
-            url: "/auth/Auth",  
+            url: "/auth/Auth",
             dataType: 'json',
-            data: obj,
+            data: {
+                'email': email,
+                'password': password
+            },
             success: function (result) {
                 console.log(result)
                 window.location.href = result;

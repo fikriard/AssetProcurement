@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace API.Repositories.Data
 {
-    public class AssetSubmissionRepository
+    public class AssetSubmissionRepository : GeneralRepository<AssetSubmission, string>
     {
         MyContext myContext;
         public IConfiguration _configuration;
-        public AssetSubmissionRepository(MyContext myContext, IConfiguration configuration)
+        public AssetSubmissionRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
             this.myContext = myContext;
             this._configuration = configuration;
@@ -69,6 +69,69 @@ namespace API.Repositories.Data
             var registeringsubmission = myContext.SaveChanges();
             return registeringsubmission;
         }
+
+        public int SubmissionUpdateFinance(SubmissionFinance submission , string assetcode, int yearsid)
+        {
+             var submissions = myContext.AssetSubmission.Find(assetcode);
+
+                 submissions.AssetCode = submission.AssetCode;
+                submissions.AssetCategory_Id = submission.AssetCategory_Id;
+                submissions.AssetLocation_Id = submission.AssetLocation_Id;
+                submissions.AssetName = submission.AssetName;
+                submissions.Volume = submission.Volume;
+                submissions.prize = submission.prize;
+                switch (submission.Status)
+                {
+                    case 0:
+                        submissions.Status = Status.Draft;
+                        break;
+                    case 1:
+                        submissions.Status = Status.Posted;
+                        break;
+                    case 2:
+                        submissions.Status = Status.Approved;
+                        break;
+                    case 3:
+                        submissions.Status = Status.Rejected;
+                        break;
+                    case 4:
+                        submissions.Status = Status.Canceled;
+                        break;
+                    case 5:
+                        submissions.Status = Status.ApprovedByManager;
+                        break;
+                    case 6:
+                        submissions.Status = Status.ApprovedByFinance;
+                        break;
+                    case 7:
+                        submissions.Status = Status.RejectedByManager;
+                        break;
+                    case 8:
+                        submissions.Status = Status.RejectedByFinance;
+                        break;
+                }
+                submissions.AssetValue = submission.AssetValue;
+                submissions.GoodAsset = submission.GoodAsset;
+                submissions.BrokenAsset = submission.BrokenAsset;
+                submissions.Employee_Id = submission.Employee_Id;
+                submissions.YearsOfSubmission = submission.YearsOfSubmission;
+            
+            
+            var assetsubmissions = myContext.SaveChanges();
+            if (assetsubmissions > 0)
+            {
+                var years = myContext.YearsProcurement.Find(yearsid);
+                if (years == null)
+                {
+                    return -1;
+                }
+                 years.Total += submission.AssetValue;
+                var assubmission = myContext.SaveChanges();
+                return assubmission;
+            }
+            
+            return 0;
+        }
         public int submissionEdit(string assetcode, SubmisionEdit submisionEdit)
         {
             var data = myContext.AssetSubmission.Find(assetcode);
@@ -106,7 +169,7 @@ namespace API.Repositories.Data
             var data = assetSubmission.ToList();
             return data;
         }
-        public IEnumerable<SubmissionM> GetSubmission(int employeeid)
+        public IEnumerable<SubmissionM> GetSubmission(string employeeid)
         {
             var register = from a in myContext.Employees
                            where a.NIK == employeeid
@@ -115,12 +178,13 @@ namespace API.Repositories.Data
                            select new SubmissionM()
                            {
                                AssetCode = b.AssetCode,
+                               Employees = b.Employees,
                                AssetName = b.AssetName,
                                Volume = b.Volume,
                                Status = (int)b.Status,
-                               AssetLocation_Id = b.AssetLocation_Id,
+                               AssetLocation = b.AssetLocation,
                                AssetValue = b.AssetValue,
-                               YearsOfSubmission = b.YearsOfSubmission,
+                               YearsProcurement = b.YearsProcurement,
                            };
             var data = register.ToList().OrderBy(iss => (iss.Status, true));
             return data;
@@ -133,9 +197,13 @@ namespace API.Repositories.Data
                            where b.Status == Status.Posted
                            select new SubmissionAF()
                            {
-                               Employee_Id = b.Employee_Id,
+                               Employees = b.Employees,
+                               AssetCategory = b.AssetCategory,
+                               AssetLocation = b.AssetLocation,
+                               YearsProcurement = b.YearsProcurement,
                                AssetLocation_Id = b.AssetLocation_Id,
                                AssetCode = b.AssetCode,
+                               Status = (int)b.Status,
                                AssetName = b.AssetName,
                                Volume = b.Volume,
                                AssetValue = b.AssetValue,
@@ -151,13 +219,18 @@ namespace API.Repositories.Data
                            where b.Status == Status.Approved
                            select new Submission()
                            {
+                               Employees = b.Employees,
+                               AssetCategory = b.AssetCategory,
+                               AssetLocation = b.AssetLocation,
+                               YearsProcurement = b.YearsProcurement,
+                               AssetLocation_Id = b.AssetLocation_Id,
                                AssetCode = b.AssetCode,
                                AssetName = b.AssetName,
                                Volume = b.Volume,
                                AssetValue = b.AssetValue,
-                               AssetLocation_Id = b.AssetLocation_Id,
-                               AssetCategory_Id = b.AssetCategory_Id,
                                YearsOfSubmission = b.YearsOfSubmission,
+                               GoodAsset = b.GoodAsset,
+                               BrokenAsset = b.BrokenAsset
                            };
             var data = register.ToList();
             return data;
@@ -169,9 +242,13 @@ namespace API.Repositories.Data
                            where b.Status == Status.ApprovedByManager
                            select new SubmissionAF()
                            {
-                               Employee_Id = b.Employee_Id,
+                               Employees = b.Employees,
+                               AssetCategory = b.AssetCategory,
+                               AssetLocation = b.AssetLocation,
+                               YearsProcurement = b.YearsProcurement,
                                AssetLocation_Id = b.AssetLocation_Id,
                                AssetCode = b.AssetCode,
+                               Status = (int)b.Status,
                                AssetName = b.AssetName,
                                Volume = b.Volume,
                                AssetValue = b.AssetValue,

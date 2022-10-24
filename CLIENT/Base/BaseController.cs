@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CLIENT.Base
 {
-    public class BaseController<TEntity, TRepository> : Controller
+    public class BaseController<TEntity, TRepository,Primary> : Controller
            where TEntity : class
-           where TRepository : IGeneralRepository<TEntity>
+           where TRepository : IGeneralRepository<TEntity,Primary>
     {
         private readonly TRepository repository;
         public BaseController(TRepository repository)
@@ -25,7 +25,7 @@ namespace CLIENT.Base
 
         //GET BY ID
         [HttpGet]
-        public async Task<JsonResult> Get(int id)
+        public async Task<JsonResult> Get(Primary id)
         {
             var result = await repository.Get(id);
             return Json(result);
@@ -41,7 +41,7 @@ namespace CLIENT.Base
 
         //PUT
         [HttpPut]
-        public JsonResult Put(int id, TEntity entity)
+        public JsonResult Put(Primary id, TEntity entity)
         {
             var result = repository.Put(id, entity);
             return Json(result);
@@ -49,7 +49,7 @@ namespace CLIENT.Base
 
         //DELETE
         [HttpDelete]
-        public JsonResult DeleteEntity(int Id)
+        public JsonResult DeleteEntity(Primary Id)
         {
             var result = repository.Delete(Id);
             return Json(result);

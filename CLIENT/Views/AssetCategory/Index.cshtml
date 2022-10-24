@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+    <h1 align="center">Asset Category Data</h1>
+    <p>
+       @* <a class="btn btn-default" data-toggle="modal" data-target="#addAssetCategory" onclick="Create()">Create New</a>*@
+        <button type="button" class="btn btn-primary add-expense" data-toggle="modal" data-target="#addAssetCategory" onclick="Create()">Create New</button>
+    </p>
+    <div id="container-body">
+        <table class="table table-hover dt-responsive table-striped nowarp" id="dataTable" style="width:100%">
+            <thead class="table-active head-table text-center">
+                <tr class="bg-primary column-tab">
+                    <th scope="col" class="text-light text-center">No</th>
+                    <th scope="col" class="text-light text-center">Name</th>
+                    <th scope="col" class="text-light text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="bodyAssetCategory"></tbody>
+        </table>
+    </div>
+</div>
+
+
+@*CREATE*@
+<div class="modal fade" id="addAssetCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Asset Category</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <form>
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input class="form-control" id="addName" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" id="buttonAdd" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*EDIT*@
+<div class="modal fade" id="editAssetCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Asset Category</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <form>
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input class="form-control" id="editName" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save Changes" class="btn btn-primary" id="buttonEdit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/AssetCategory/index.js"></script>
+}
