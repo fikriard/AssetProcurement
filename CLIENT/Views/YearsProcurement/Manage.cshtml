@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Manage";
+    Layout = "_FinanceLayout";
+}
+
+<div class="container">
+    <div class="card" style="padding:2em">
+        <h1 align="center">Years Procurement Data</h1>
+        <p>
+
+        <button type="button" class="btn btn-primary add-expense" data-toggle="modal" data-target="#addYears" onclick="Create()">Create New</button>
+        </p>
+        <div id="container-body">
+            <table class="table table-hover dt-responsive table-striped nowarp" id="dataTable" style="width:100%">
+                <thead class="table-active head-table text-center">
+                    <tr class="bg-primary column-tab">
+                        <th scope="col" class="text-light text-center">No</th>
+                        <th scope="col" class="text-light text-center">Years</th>
+                        <th scope="col" class="text-light text-center">Max Fund</th>
+                        <th scope="col" class="text-light text-center">Used Fund</th>
+                        <th scope="col" class="text-light text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyYears"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+    @*CREATE*@
+    <div class="modal fade" id="addYears" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Years Procurement</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form>
+                                <div class="form-group">
+                                    <label class="control-label">Years</label>
+                                    <input class="form-control" id="addyears" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Max Fund</label>
+                                    <input class="form-control" id="addmaxfund" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" id="buttonAdd" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*EDIT*@
+    <div class="modal fade" id="editYear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Years Procurement</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form>
+                                <div class="form-group">
+                                    <label class="control-label">Years</label>
+                                    <input class="form-control" id="editYears" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Max fund</label>
+                                    <input class="form-control" id="editMaxfund" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Used fund</label>
+                                    <input class="form-control" id="edittotal" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Save Changes" class="btn btn-primary" id="buttonEdit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts
+{
+        <script src="~/js/YearsProcurement/Manage.js"></script>
+    }

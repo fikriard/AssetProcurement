@@ -186,3 +186,10 @@ C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_FinanceLayout.cshtml.g.cs
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\ForgetPass.cshtml.g.cs
 C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\AssetCategory\Index.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\YearsProcurement\Index.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\AssetLocation\Index.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\ChangePass.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\ChangePassAdmin.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\Home\ChangePassFinance.cshtml.g.cs
+C:\Users\acer\source\repos\Aset_Procurement_System\CLIENT\obj\Debug\netcoreapp3.1\Razor\Views\YearsProcurement\Manage.cshtml.g.cs

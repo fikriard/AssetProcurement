@@ -6,13 +6,14 @@
             dataSrc: "",
             dataType: "JSON"
         },
+        "columnDefs": [
+            { "className": "dt-center", "targets": "_all" }
+        ],
         "columns": [
             {
                 "data": "",
                 "render": function (data, type, row) {
-                    console.log(row.employee_Id);
-                    console.log(data);
-                    console.log(row);
+                  
                     return `${row.employees.firstName}` +" " +`${row.employees.lastName}`;
                 }
             },
@@ -28,20 +29,6 @@
                 "render": function (data, type, row) {
                   
                     return `${row.volume}`;
-                }
-            },
-            {
-                "data": "",
-                "render": function (data, type, row) {
-                    
-                    return `${row.status}`;
-                }
-            },
-            {
-                "data": "",
-                "render": function (data, type, row) {
-                    
-                    return `${row.assetValue}`;
                 }
             },
             {

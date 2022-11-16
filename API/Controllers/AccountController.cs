@@ -65,7 +65,7 @@ namespace API.Controllers
             }
             return BadRequest();
         }
-        [HttpPut("Change-Password/{id}")]
+        [HttpPut("Change-Password")]
         public IActionResult ChangePassword(ChangePassword changePassword)
         {
             if (string.IsNullOrWhiteSpace(changePassword.Email) ||

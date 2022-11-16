@@ -47,13 +47,13 @@ namespace API.Repositories.Data
                         submissions.Status = Status.Canceled;
                         break;
                     case 5:
-                        submissions.Status = Status.ApprovedByManager;
+                        submissions.Status = Status.ApprovedByAdmin;
                         break;
                     case 6:
                         submissions.Status = Status.ApprovedByFinance;
                         break;
                     case 7:
-                        submissions.Status = Status.RejectedByManager;
+                        submissions.Status = Status.RejectedByAdmin;
                         break;
                     case 8:
                         submissions.Status = Status.RejectedByFinance;
@@ -98,13 +98,13 @@ namespace API.Repositories.Data
                         submissions.Status = Status.Canceled;
                         break;
                     case 5:
-                        submissions.Status = Status.ApprovedByManager;
+                        submissions.Status = Status.ApprovedByAdmin;
                         break;
                     case 6:
                         submissions.Status = Status.ApprovedByFinance;
                         break;
                     case 7:
-                        submissions.Status = Status.RejectedByManager;
+                        submissions.Status = Status.RejectedByAdmin;
                         break;
                     case 8:
                         submissions.Status = Status.RejectedByFinance;
@@ -239,7 +239,7 @@ namespace API.Repositories.Data
         {
             var register = from a in myContext.Employees
                            join b in myContext.AssetSubmission on a.NIK equals b.Employee_Id
-                           where b.Status == Status.ApprovedByManager
+                           where b.Status == Status.ApprovedByAdmin
                            select new SubmissionAF()
                            {
                                Employees = b.Employees,
@@ -258,21 +258,26 @@ namespace API.Repositories.Data
             return data;
         }
         //sementara Tampilan Finance
-        public IEnumerable<SubmissionAF> GetSubmissionYears(int Yearsid)
+        public IEnumerable<Submission> GetSubmissionYears(int Yearsid)
         {
             var register = from a in myContext.YearsProcurement
                            where a.Id == Yearsid
                            join b in myContext.AssetSubmission on a.Id equals b.YearsOfSubmission
                            where b.Status == Status.Approved
-                           select new SubmissionAF()
+                           select new Submission()
                            {
-                               Employee_Id = b.Employee_Id,
+                               Employees = b.Employees,
+                               AssetCategory = b.AssetCategory,
+                               AssetLocation = b.AssetLocation,
+                               YearsProcurement = b.YearsProcurement,
                                AssetLocation_Id = b.AssetLocation_Id,
                                AssetCode = b.AssetCode,
                                AssetName = b.AssetName,
                                Volume = b.Volume,
                                AssetValue = b.AssetValue,
                                YearsOfSubmission = b.YearsOfSubmission,
+                               GoodAsset = b.GoodAsset,
+                               BrokenAsset = b.BrokenAsset
                            };
             var data = register.ToList();
             return data;

@@ -22,7 +22,7 @@ namespace CLIENT.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost("Login/Auth")]
         public async Task<IActionResult> Auth(Login login)
         {
             var jwttoken = await authRepository.Auth(login);
@@ -47,7 +47,7 @@ namespace CLIENT.Controllers
             }
             else if(role == "Admin")
             {
-                return Json(Url.Action("GetAdminAll", "Submission"));
+                return Json(Url.Action("GetAdmin", "Submission"));
             }
             else
             {
@@ -57,8 +57,21 @@ namespace CLIENT.Controllers
 
         }
 
+        [HttpPost]
+        public JsonResult Register(Register register)
+        {
+            var result = authRepository.Register(register);
+            return Json(result);
+        }
+        [HttpPut]
+        public JsonResult Changepass(ChangePassword changePassword)
+        {
+            var sessionId = HttpContext.Session.GetString("Email");
+            var result = authRepository.ChangePass(changePassword, sessionId);
 
 
+            return Json(result);
+        }
         /*[Route("register")]
         [HttpPost]
         public JsonResult Register(Register register)

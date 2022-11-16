@@ -73,6 +73,17 @@ namespace CLIENT.Repositories.Data
             }
             return entitiesNew;
         }
+        public async Task<List<AssetSubmission>> GetYears(int id)
+        {
+            List<AssetSubmission> entitiesNew = new List<AssetSubmission>();
+
+            using (var response = await httpClient.GetAsync(request + "GetYears/?yearsid=" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entitiesNew = JsonConvert.DeserializeObject<List<AssetSubmission>>(apiResponse);
+            }
+            return entitiesNew;
+        }
 
         public HttpStatusCode SubmissionInsert(Submission submission, string employeeid)
         {

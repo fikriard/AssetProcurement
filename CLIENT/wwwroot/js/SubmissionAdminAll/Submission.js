@@ -6,6 +6,9 @@
             dataSrc: "",
             dataType: "JSON"
         },
+        "columnDefs": [
+            { "className": "dt-center", "targets": "_all" }
+        ],
         "columns": [
             {
                 "data": "",
@@ -58,7 +61,7 @@
                         onclick="Delete('${row['assetCode']}')"><i class="bi-trash3-fill"></i></button>
 
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-placement="top" title="Edit"
-                        data-target="#EditModal" onclick="Edit('${row['assetCode']}')"><i class="bi-wallet"></i></button>`;
+                        data-target="#EditModal" onclick="Edit('${row['assetCode']}')"><i class="bi-pencil-square"></i></button>`;
                 }
             }
         ]
@@ -148,14 +151,18 @@ function Edit(id) {
             }).done((result) => {
                 console.log(result);
                 if (result == 200) {
-                    Swal.fire(
-                        'Good Job!',
-                        'Your data has been saved.',
-                        'success'
-                    )
-                    $("#EditModal").modal("toggle");
-                    $('#dataTableGetSubmissionAdmin').DataTable().ajax.reload();
-                    window.location.href = "/Submission/GetAdminAll"
+                    Swal.fire({
+                        title: 'Good Job!',
+                        text: 'Your data has been saved.',
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/Submission/GetAdminAll"
+                        }
+                    });
+                    /*$("#EditModal").modal("toggle");
+                    $('#dataTableGetSubmissionAdmin').DataTable().ajax.reload();*/
+                    
                 }
                 else if (result == 400) {
                     Swal.fire(

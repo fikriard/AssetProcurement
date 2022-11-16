@@ -8,9 +8,9 @@
 
 
 <div class="container-fluid">
-    <div class="card">
+    <div class="card" style="padding:2em">
         <div class="card-body">
-            <h4 class="card-title">Get Submission</h4>
+            <h1 align="center">Asset Submission Data</h1>
         </div>
         <div class="card-body">
             <button type="button" class="btn btn-primary add-expense" data-toggle="modal" data-target="#exampleModal" onclick="Create()"> New Submission </button>
@@ -25,7 +25,7 @@
                     <th scope="col" class="text-light text-center">Status</th>
                     <th scope="col" class="text-light text-center">Years of Submission</th>
                     <th scope="col" class="text-light text-center">Action</th>
-                    <th></th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -45,39 +45,61 @@
                 </button>
             </div>
             <div class="modal-body">
+                <h5>Asset Code Description :</h5>
+                <ul>
+                    <li>0000 = Asset Code (0001/0002/0003..dst)</li>
+                    <li>CTG = Asset Category(ELK,BHP,FRT,dll)</li>
+                    <li>LOC = Asset Location(Barcelona,Amsterdam,dll)</li>
+                    <li>20XX = Years Of Submission</li>
+                </ul>
                 <form>
                     <div class="form-group">
                         <label for="AssetCode">Asset Code</label>
-                        <input type="text" class="form-control" id="AssetCode">
+                        <input type="text" class="form-control" id="AssetCode" placeholder="0000CTGLOC20XX" required>
                     </div>
                     <div class="form-group">
                         <label for="AssetName">Asset Name</label>
-                        <input type="text" class="form-control" id="AssetName">
+                        <input type="text" class="form-control" id="AssetName" required>
                     </div>
                     <div class="form-group">
                         <label for="Volume">Volume</label>
-                        <input type="number" class="form-control" id="Volume">
+                        <input type="number" class="form-control" id="Volume" required>
                     </div>
                     <div class="form-group">
-                        <label for="Prize">Prize</label>
-                        <span class="input-group-text">Rp.</span>
-                        <input type="number" class="form-control" id="Prize">
+                        <label for="Prize">Prize/pcs</label>
+                        <input type="number" class="form-control" id="Prize" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="form-group">
                         <label for="AssetCategory">Asset Category</label>
-                        <input type="number" class="form-control" id="AssetCategory">
+                        <select class="custom-select" id="AssetCategoryoption" aria-label="Example select with button addon">
+                            <option selected>----Choose----</option>
+                        </select>
+
+                        @*<input type="number" class="form-control" id="AssetCategory">*@
                     </div>
                     <div class="form-group">
                         <label for="AssetLocation">Asset Location</label>
-                        <input type="number" class="form-control" id="AssetLocation">
+                        <select class="custom-select" id="AssetLocation" aria-label="Example select with button addon">
+                            <option selected>----Choose----</option>
+                        </select>
+                        @*<input type="number" class="form-control" id="AssetLocation">*@
                     </div>
                     <div class="form-group">
                         <label for="Years">Years Of Submission</label>
-                        <input type="number" class="form-control" id="Years">
+                        <select class="custom-select" id="Years" aria-label="Example select with button addon">
+                            <option selected>----Choose----</option>
+                        </select>
+                        @*<input type="number" class="form-control" id="Years">*@
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary" id="buttonAdd" />
                     </div>
+                    @*<div class="form-group">
+                <input type="submit" value="Close" class="btn btn-secondary" id="Close" />
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </button>*@
                 </form>
                 <div class="modal-footer">
                     @*<button type="submit" class="btn btn-primary" id="buttonAdd">Submit</button>*@
@@ -92,7 +114,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="DetailModal">Modal title</h5>
+                <h5 class="modal-title" id="DetailModal">Asset Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -104,7 +126,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

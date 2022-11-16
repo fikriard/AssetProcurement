@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "_AdminLayout";
+}
+<div class="container-fluid">
+    <div class="card" style="padding:2em">
+        <h5 class="title">Registration Account</h5>
+        <form>
+            <div class="form-group">
+                <label for="NIK">NIK</label>
+                <input type="text" class="form-control" id="NIK">
+            </div>
+            <div class="form-group">
+                <label for="FirstName">First Name</label>
+                <input type="text" class="form-control" id="FirstName">
+            </div>
+            <div class="form-group">
+                <label for="LastName">Last Name</label>
+                <input type="text" class="form-control" id="LastName">
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email">
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number</label>
+                <input type="text" class="form-control" id="PhoneNumber">
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select class="custom-select" id="Gender" aria-label="Example select with button addon">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="UserName">
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" id="Password">
+                <span toggle="#Password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+            <div class="form-group">
+                <label for="Job_Id">Tittle</label>
+                <select class="custom-select" id="Job_Id" aria-label="Example select with button addon">
+                    <option selected>----Choose----</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Department_Id">Department</label>
+                <select class="custom-select" id="Department_Id" aria-label="Example select with button addon">
+                    <option selected>----Choose----</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" id="buttonAdd" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/Register/Register.js"></script>
+}

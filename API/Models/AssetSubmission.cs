@@ -43,9 +43,9 @@ namespace API.Models
         Approved,
         Rejected,
         Canceled,
-        ApprovedByManager,
+        ApprovedByAdmin,
         ApprovedByFinance,
-        RejectedByManager,
+        RejectedByAdmin,
         RejectedByFinance,
     }
 

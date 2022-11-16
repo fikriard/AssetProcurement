@@ -6,6 +6,9 @@
             dataSrc: "",
             dataType: "JSON"
         },
+        "columnDefs": [
+            { "className": "dt-center", "targets": "_all" }
+        ],
         "columns": [
             {
                 "data": "",
@@ -28,7 +31,7 @@
                         onclick="Delete('${row['id']}')"><i class="bi-trash3-fill"></i></button>
 
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-placement="top" title="Edit"
-                        data-target="#editAssetCategory" onclick="Edit('${row['id']}')"><i class="bi-wallet"></i></button>`;
+                        data-target="#editAssetCategory" onclick="Edit('${row['id']}')"><i class="bi-pencil-square"></i></button>`;
                 }
             }
         ]
@@ -50,13 +53,17 @@ function Create() {
         }).done((result) => {
             console.log(result);
             if (result == 200) {
-                Swal.fire(
-                    'Good Job!',
-                    'Your data has been saved.',
-                    'success'
-                )
-                $("#addAssetCategory").modal("toggle");
-                $('#dataTable').DataTable().ajax.reload();
+                Swal.fire({
+                    title: 'Good Job!',
+                    text: 'Your data has been saved.',
+                    icon: 'success',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/AssetCategory/Index"
+                    }
+                });
+                /*$("#addAssetCategory").modal("toggle");
+                $('#dataTable').DataTable().ajax.reload();*/
             }
             else if (result == 400) {
                 Swal.fire(
@@ -91,11 +98,15 @@ function Edit(id) {
             }).done((result) => {
                 console.log(result);
                 if (result == 200) {
-                    Swal.fire(
-                        'Good Job!',
-                        'Your data has been saved.',
-                        'success'
-                    )
+                    Swal.fire({
+                        title: 'Good Job!',
+                        text: 'Your data has been saved.',
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/AssetCategory/Index"
+                        }
+                    });
                     $("#editAssetCategory").modal("toggle");
                     $('#dataTable').DataTable().ajax.reload();
                 }

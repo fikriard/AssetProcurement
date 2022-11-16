@@ -31,24 +31,13 @@ namespace CLIENT
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddHttpContextAccessor();
-            services.AddSession();
-            services.AddScoped<AssetSubmissionRepository>();
-            services.AddScoped<AssetCategoryRepository>();
-            services.AddScoped<AssetLocationRepository>();
-            services.AddScoped<YearsProcurementRepository>();
-            services.AddScoped<AuthRepository>();
-            
-
-
-            services.AddDbContext<MyContext>(options =>
-                   options.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddSession(option =>
             {
                 option.IdleTimeout = TimeSpan.FromMinutes(15);
             });
-            
+            services.AddHttpContextAccessor();
+            services.AddControllersWithViews();
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,8 +59,19 @@ namespace CLIENT
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            
-            
+
+            services.AddSession();
+            services.AddScoped<AssetSubmissionRepository>();
+            services.AddScoped<AssetCategoryRepository>();
+            services.AddScoped<AssetLocationRepository>();
+            services.AddScoped<YearsProcurementRepository>();
+            services.AddScoped<DepartmentRepository>();
+            services.AddScoped<JobsRepository>();
+            services.AddScoped<AuthRepository>();
+ 
+            services.AddDbContext<MyContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("connection")));
+ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,16 +93,7 @@ namespace CLIENT
             app.UseRouting();
 
             app.UseSession();
-            app.Use(async (HttpContext context, Func<Task> next) =>
-            {
-                var token = context.Session.GetString("token");
-                if (!string.IsNullOrEmpty(token))
-                {
-                    context.Request.Headers.Add("Authorization", "Bearer " + token.ToString());
-                }
-
-                await next();
-            });
+            
             app.UseStatusCodePages(async context =>
             {
                 var request = context.HttpContext.Request;
@@ -122,8 +113,19 @@ namespace CLIENT
                 }
             });
 
-           
+            app.Use(async (HttpContext context, Func<Task> next) =>
+            {
+                var token = context.Session.GetString("JWToken");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.Request.Headers.Add("Authorization", "Bearer " + token.ToString());
+                }
+
+                await next();
+            });
+
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

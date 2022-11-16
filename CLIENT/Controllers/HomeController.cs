@@ -1,4 +1,5 @@
 ﻿using CLIENT.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -36,7 +37,26 @@ namespace CLIENT.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Employee")]
+        public IActionResult ChangePass()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult ChangePassAdmin()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Finance")]
+        public IActionResult ChangePassFinance()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -55,5 +75,6 @@ namespace CLIENT.Controllers
         {
             return View("Unauthorized");
         }
+
     }
 }

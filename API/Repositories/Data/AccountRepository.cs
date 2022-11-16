@@ -125,9 +125,10 @@ namespace API.Repositories.Data
                 var checkUser = myContext.User.Find(checkEmail.NIK);
                 if (checkUser != null)
                 {
-                    if (oldPasswordInput == checkUser.Password)
+                    if (Hashing.ValidatePassword(oldPasswordInput, checkUser.Password))
                     {
-                        checkUser.Password = newPassword;
+                        var passwordHashing = Hashing.HashPassword(newPassword);
+                        checkUser.Password = passwordHashing;
                         int result = myContext.SaveChanges();
                         return result;
                     }

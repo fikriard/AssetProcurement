@@ -6,6 +6,9 @@
             dataSrc: "",
             dataType: "JSON"
         },
+        "columnDefs": [
+            { "className": "dt-center", "targets": "_all" }
+        ],
         "columns": [
             {
                 "data": "",
@@ -28,25 +31,12 @@
                     return `${row.volume}`;
                 }
             },
-            {
-                "data": "",
-                "render": function (data, type, row) {
-
-                    return `${row.status}`;
-                }
-            },
+           
             {
                 "data": "",
                 "render": function (data, type, row) {
 
                     return `${row.assetValue}`;
-                }
-            },
-            {
-                "data": "",
-                "render": function (data, type, row) {
-
-                    return `${row.assetLocation.name}`;
                 }
             },
             {

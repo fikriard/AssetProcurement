@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using CLIENT.Base;
 using CLIENT.Repositories.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace CLIENT.Controllers
         {
 
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();

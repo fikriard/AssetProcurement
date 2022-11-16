@@ -6,6 +6,9 @@
             dataSrc: "",
             dataType: "JSON"
         },
+        "columnDefs": [
+            { "className": "dt-center", "targets": "_all" }
+        ],
         "columns": [
             {
                 "data": "",
@@ -30,7 +33,37 @@
             {
                 "data": "",
                 "render": function (data, type, row) {
-                    return `${row.status}`;
+                    let status
+                    switch (row.status) {
+                        case 0:
+                           status = "Draft";
+                            break;
+                        case 1:
+                            status = "Posted";
+                            break;
+                        case 2:
+                            status = "Approved";
+                            break;
+                        case 3:
+                            status = "Rejected";
+                            break;
+                        case 4:
+                            status = "Canceled";
+                            break;
+                        case 5:
+                            status = "Approved By Admin";
+                            break;
+                        case 6:
+                            status = "Approved By Finance";
+                            break;
+                        case 7:
+                            status = "Rejected By Admin";
+                            break;
+                        case 8:
+                            status = "Rejected By Finance";
+                            break;
+                    }
+                    return `${status}`;
                 }
             },
             {
@@ -45,9 +78,6 @@
                 "render": function (data, type, row, meta) {
 
                     return `<button type="button" class="btn btn-info" data-toggle="modal" data-placement="top" title="Detail" data-target="#DetailModal" onclick="getsubmission('${row['assetCode']}')"><i class="bi-info-square-fill"></i></button>
-
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-placement="top" title="Delete"
-                        onclick="Delete('${row['assetCode']}')"><i class="bi-trash3-fill"></i></button>
                        `;
                 }
             }
@@ -57,8 +87,51 @@
 
 });
 
+
+
 function Create() {
+    $("#AssetCode").val("");
+    $("#AssetName").val("");
+    $("#Volume").val("");
+    $("#Prize").val("");
+   
     console.log("test")
+    $.ajax({
+        type: "GET",
+        url: "/AssetCategory/GetAll",
+        dataType: 'json',
+        dataSrc: "",
+        success: function (result) {
+            console.log(result);
+            $.each(result, function () {
+                $("#AssetCategoryoption").append($("<option />").val(this.id).text(`${this.name}`));
+            });
+        }
+    })
+    $.ajax({
+        type: "GET",
+        url: "/AssetLocation/GetAll",
+        dataType: 'json',
+        dataSrc: "",
+        success: function (result) {
+            console.log(result);
+            $.each(result, function () {
+                $("#AssetLocation").append($("<option />").val(this.id).text(`${this.name}`));
+            });
+        }
+    })
+    $.ajax({
+        type: "GET",
+        url: "/YearsProcurement/GetAll",
+        dataType: 'json',
+        dataSrc: "",
+        success: function (result) {
+            console.log(result);
+            $.each(result, function () {
+                $("#Years").append($("<option />").val(this.id).text(`${this.years}`));
+            });
+        }
+    })
     let btn = document.getElementById("buttonAdd");
     btn.addEventListener("click", function (e) {
         e.preventDefault();
@@ -67,7 +140,7 @@ function Create() {
         obj.assetName = $("#AssetName").val();
         obj.volume = $("#Volume").val();
         obj.prize = $("#Prize").val();
-        obj.assetCategory_Id = $("#AssetCategory").val();
+        obj.assetCategory_Id = $("#AssetCategoryoption").val();
         obj.assetLocation_Id = $("#AssetLocation").val();
         obj.yearsOfSubmission = $("#Years").val();
         obj.status = 1;
@@ -78,14 +151,18 @@ function Create() {
         }).done((result) => {
             console.log(result);
             if (result == 200) {
-                Swal.fire(
-                    'Good Job!',
-                    'Your data has been saved.',
-                    'success'
-                )
-                $("#exampleModal").modal("toggle");
-                $('#dataTableGetSubmissionEmployee').DataTable().ajax.reload();
-                window.location.href = "/Submission/GetEmployee"
+                Swal.fire({
+                    title: 'Good Job!',
+                    text: 'Your data has been saved.',
+                    icon: 'success',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $("#exampleModal").hide();
+                        /*  $('#dataTableGetSubmissionEmployee').DataTable().ajax.reload();*/
+                        window.location.href = "/Submission/GetEmployee"
+                    }
+                });
             }
             else if (result == 400) {
                 Swal.fire(
@@ -147,6 +224,11 @@ function getsubmission(id) {
     })
 }
 
+$(".close").click(function () {
+     $('#AssetCategoryoption').find('option').remove()
+    $('#AssetLocation').find('option').remove()
+    $('#Years').find('option').remove()
+})
 function Delete(id) {
     Swal.fire({
         title: 'Are you sure?',

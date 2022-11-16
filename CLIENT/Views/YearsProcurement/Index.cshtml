@@ -1,0 +1,72 @@
+﻿
+@{ ViewData["Title"] = "Index";
+   Layout = "_FinanceLayout"; }
+<div class="container-fluid">
+    <div class="card" style="padding:2em">
+        <div class="input-group">
+            <select class="custom-select" id="YearsOption" aria-label="Example select with button addon"></select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="YearsButtton">Show</button>
+                @*<button class="btn btn-danger" type="button" id="close" onclick="close()">Hide</button>*@
+            </div>
+        </div>
+
+        <div class="wrapper" style="background:white !important">
+            <div class="container d-flex flex-column justify-content-center align-items-center">
+                <div class="title text-center mb-5">
+                    <h1>Fund Presentation</h1>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover dt-responsive table-striped nowarp" id="dataTableGetYears" style="width:100%">
+            <thead class="table-active head-table text-center">
+                <tr class="bg-primary column-tab">
+                    <th scope="col" class="text-light text-center">Employee</th>
+                    <th scope="col" class="text-light text-center">Asset Name</th>
+                    <th scope="col" class="text-light text-center">Volume</th>
+                    <th scope="col" class="text-light text-center">Status</th>
+                    <th scope="col" class="text-light text-center">Asset Value</th>
+                    <th scope="col" class="text-light text-center">Asset Location</th>
+                    <th scope="col" class="text-light text-center">Years of Submission</th>
+                    <th scope="col" class="text-light text-center">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="DetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DetailModal">Asset Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Detail">
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="~/js/YearsProcurement/Chart.js"></script>
+}
